@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer</title>
+    <link rel="stylesheet" href="Timer.css">
+</head>
+
+<body>
+    <h1>Countdown Timer</h1>
+    <div class="main-container">
+        <div class="input-container">
+
+            <div class="ip-div">
+                <label for="date">Select Date</label>
+                <input type="date" name="date" id="date">
+            </div>
+
+            <div class="ip-div">
+                <label for="date">Select Time</label>
+                <input type="time" name="time" id="time">
+            </div>
+
+            <button id="submit-btn" type="button">Confirm Date & Time</button>
+        </div>
+
+        <div class="output-container">
+            <div class="output-box">
+                <p class="label">Days</p>
+                <div class="displayTxt" id="days">00</div>
+            </div>
+            <div class="output-box">
+                <p class="label">Hours</p>
+                <div class="displayTxt" id="hours">00</div>
+            </div>
+            <div class="output-box">
+                <p class="label">Minutes</p>
+                <div class="displayTxt" id="minutes">00</div>
+            </div>
+            <div class="output-box">
+                <p class="label">Seconds</p>
+                <div class="displayTxt" id="seconds">00</div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./Timer.js"></script>
+
+</html>

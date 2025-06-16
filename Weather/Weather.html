@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather</title>
+    <link rel="stylesheet" href="Weather.css">
+</head>
+
+<body>
+    <h1>Weather APP</h1>
+
+    <div class="input-container">
+        <p class="err">Enter a Valid City</p>
+        <input type="text" name="city" id="cityinput" placeholder="Enter the City" >
+        <button type="button">Get Weather Update</button>
+    </div>
+    <div class="loader">Loading..</div>
+    <div class="output-container">
+        
+        <div class="location-details card">
+            <p id="city">City:</p>
+            <p id="region">State:</p>
+            <p id="country">Counry:</p>
+            <p id="time-zone">Time Zone:</p>
+        </div>
+
+        <div class="temp-details card">
+            <img src="" alt="Condition Image" srcset="" style="display:none">
+            <p id="tempreture">Temp:</p>
+            <p id="condition">Condition:</p>
+        </div>
+    </div>
+</body>
+<script src="./Weather.js"></script>
+
+</html>

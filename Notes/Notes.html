@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes</title>
+    <link rel="stylesheet" href="./Notes.css">
+</head>
+
+<body>
+    <h1>Notes App</h1>
+
+    <div class="main-container">
+        <div class="input-container">
+            <input type="text" name="title" id="title" placeholder="Title" class="inputs">
+            <div class="input-tag-container">
+                <input type="text" name="tags" id="tags" placeholder="Add Tags" class="inputs">
+                <button type="button" id="add-tag-btn">Add Tag</button>
+            </div>
+            <div class="tags-container">
+                <!-- <p class="input-tag">Gym</p>
+                <p class="input-tag">Workout</p>
+                <p class="input-tag">Health</p> -->
+            </div>
+            <textarea name="content" id="content" cols="30" rows="10" placeholder="Content" class="inputs"></textarea>
+
+            <button type="button" id="add-note-btn">Add Note</button>
+        </div>
+
+        <div class="search-container">
+            <input type="text" name="search" id="search" placeholder="Search Notes" class="inputs">
+        </div>
+
+        <div class="notes-container">
+            <div class="note">
+                <h3 id="note-title">Hit a Gym</h3>
+                <button type="button" id="deletebtn">❌</button>
+                <div class="tags">
+                    <p>Gym</p>
+                    <p>Workout</p>
+                    <p>Health</p>
+                </div>
+                <div id="note-content">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequuntur, id provident saepe sit
+                    voluptate dolore totam suscipit placeat sapiente quaerat voluptas ducimus quo! Ex voluptas similique
+                    iure architecto error excepturi iusto, perspiciatis dolorum fugit eius cupiditate autem recusandae
+                    in deleniti eos atque quidem quibusdam, quam et ipsum maxime provident! Cumque.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="./Notes.js"></script>
+
+</html>
