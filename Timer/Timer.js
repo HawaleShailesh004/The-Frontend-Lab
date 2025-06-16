@@ -1,86 +1,85 @@
-let inputTime = document.getElementById("time");
-let inputDate = document.querySelector("#date");
+// DOM Elements
+const inputTime = document.getElementById("time");
+const inputDate = document.querySelector("#date");
 
-let dayDisplay = document.querySelector("#days");
-let hrDisplay = document.querySelector("#hours");
-let minDisplay = document.querySelector("#minutes");
-let secDisplay = document.querySelector("#seconds");
+const dayDisplay = document.querySelector("#days");
+const hrDisplay = document.querySelector("#hours");
+const minDisplay = document.querySelector("#minutes");
+const secDisplay = document.querySelector("#seconds");
 
-let btn = document.querySelector("#submit-btn");
+const btn = document.querySelector("#submit-btn");
 
 let futureDate;
 let interval;
 
+// Save future date to LocalStorage
 const saveToLocalStorage = () => {
   localStorage.setItem("fd", `${futureDate}`);
 };
 
+// Load date from LocalStorage
 const getFromLS = () => {
-  let d = localStorage.getItem("fd");
+  const stored = localStorage.getItem("fd");
 
-  if (d) {
-    let dt = new Date(d);
-    futureDate = dt;
+  if (stored) {
+    futureDate = new Date(stored);
     interval = setInterval(keepUpdating, 1000);
   }
 };
 
-let today = new Date();
+// Setup today's min date
+const today = new Date();
 const yyyy = today.getFullYear();
 const mm = String(today.getMonth() + 1).padStart(2, "0");
 const dd = String(today.getDate()).padStart(2, "0");
+inputDate.min = `${yyyy}-${mm}-${dd}`;
 
-const minDate = `${yyyy}-${mm}-${dd}`;
-inputDate.min = minDate;
-
-const hh = today.getHours();
+// Setup current time as minTime (optional)
+const hh = String(today.getHours()).padStart(2, "0");
 const m = String(today.getMinutes()).padStart(2, "0");
-const ss = String(today.getSeconds()).padStart(2, "0");
+inputTime.min = `${hh}:${m}`;
 
-const minTime = `${hh}-${m}`;
-inputTime.min = minTime;
-
+// Get future date from inputs
 const getDate = () => {
-  let date = inputDate.value;
-  let time = inputTime.value;
-
-  const fd = new Date(`${date}T${time}`);
-
-  return fd;
+  const date = inputDate.value;
+  const time = inputTime.value;
+  return new Date(`${date}T${time}`);
 };
 
+// Countdown update function
 const keepUpdating = () => {
-  let cd = new Date();
-
-  let msRemaining = futureDate.getTime() - cd.getTime();
+  const current = new Date();
+  const msRemaining = futureDate.getTime() - current.getTime();
 
   if (msRemaining <= 0) {
-    alert("Time Over");
+    alert("⏰ Time Over");
     clearInterval(interval);
+    localStorage.removeItem("fd");
     inputDate.value = "";
     inputTime.value = "";
     return;
   }
 
-  dayDisplay.textContent = String(
-    Math.floor((msRemaining / (1000 * 60 * 60 * 24)) % 30)
-  ).padStart(2, "0");
-  hrDisplay.textContent = String(
-    Math.floor((msRemaining / (1000 * 60 * 60)) % 24)
-  ).padStart(2, "0");
-  minDisplay.textContent = String(
-    Math.floor((msRemaining / (1000 * 60)) % 60)
-  ).padStart(2, "0");
-  secDisplay.textContent = String(
-    Math.floor((msRemaining / 1000) % 60)
-  ).padStart(2, "0");
+  const days = Math.floor((msRemaining / (1000 * 60 * 60 * 24)) % 30);
+  const hours = Math.floor((msRemaining / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((msRemaining / (1000 * 60)) % 60);
+  const seconds = Math.floor((msRemaining / 1000) % 60);
+
+  dayDisplay.textContent = String(days).padStart(2, "0");
+  hrDisplay.textContent = String(hours).padStart(2, "0");
+  minDisplay.textContent = String(minutes).padStart(2, "0");
+  secDisplay.textContent = String(seconds).padStart(2, "0");
 };
 
+// Button click: Start countdown
 btn.addEventListener("click", () => {
   futureDate = getDate();
-  saveToLocalStorage();
+  if (!futureDate || isNaN(futureDate)) return;
 
+  saveToLocalStorage();
+  clearInterval(interval); // prevent multiple intervals
   interval = setInterval(keepUpdating, 1000);
 });
 
+// On load
 getFromLS();

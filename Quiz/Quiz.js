@@ -1,32 +1,40 @@
 import gkQuiz from "./Questions.js";
 
-let qTitleEle = document.querySelector(".question-title");
-let optionsEle = document.querySelectorAll(".option");
-let optionsContainerEle = document.querySelector(".options-container")
-let scoreEle = document.querySelector(".score");
+// DOM Elements
+const qTitleEle = document.querySelector(".question-title");
+const optionsEle = document.querySelectorAll(".option");
+const optionsContainerEle = document.querySelector(".options-container");
+const scoreEle = document.querySelector(".score");
 
+// Quiz State
 let Score = 0;
 let currentQueNo = 1;
 
+// Check if selected answer is correct
 const checkIfCorrect = (qNo, optNo) => {
-  return gkQuiz[qNo - 1].answer == optNo + 1;
+  return gkQuiz[qNo - 1].answer === optNo + 1;
 };
 
+// Set question and its options
 const setQuestion = (qNo) => {
-  let question = gkQuiz[qNo - 1];
+  const question = gkQuiz[qNo - 1];
+
   qTitleEle.textContent = question.question;
 
   question.options.forEach((optText, ind) => {
-    console.log(optText);
     optionsEle[ind].textContent = optText;
   });
 };
 
+// Initial load
 setQuestion(currentQueNo);
 scoreEle.textContent = `Your Score is ${Score} / ${currentQueNo - 1}`;
+
+// Handle option clicks
 optionsEle.forEach((optionEle, ind) => {
   optionEle.addEventListener("click", () => {
-    Score = checkIfCorrect(currentQueNo, ind) ? Score + 1 : Score;
+    const isCorrect = checkIfCorrect(currentQueNo, ind);
+    if (isCorrect) Score++;
 
     if (currentQueNo < gkQuiz.length) {
       currentQueNo++;
@@ -35,7 +43,7 @@ optionsEle.forEach((optionEle, ind) => {
     } else {
       qTitleEle.textContent = "Quiz Completed!";
       scoreEle.textContent = `Your Score is ${Score} / ${currentQueNo}`;
-      optionsContainerEle.style.display = "none"
+      optionsContainerEle.style.display = "none";
       alert(`Quiz Ends here with ${Score}..`);
     }
   });

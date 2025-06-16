@@ -1,74 +1,88 @@
-let todoListUl = document.querySelector(".todo-list-ul");
-let input = document.getElementById("todo");
-let addBTN = document.getElementById("addtodobtn");
-let deleteAllBTN = document.getElementById("deleteallbtn");
+// DOM Element References
+const todoListElement = document.querySelector(".todo-list-ul");
+const todoInput = document.getElementById("todo");
+const addButton = document.getElementById("addtodobtn");
+const deleteAllButton = document.getElementById("deleteallbtn");
 
+// Data
 let todoList = [];
 
+// Load todos from LocalStorage
 const getTodoList = () => {
-  todoList = JSON.parse(localStorage.getItem("todo"));
-
-  if (todoList) {
-    showList()
-    return todoList;
-  } else return [];
+  const storedTodos = JSON.parse(localStorage.getItem("todo"));
+  if (storedTodos) {
+    todoList = storedTodos;
+    renderTodoList();
+    return storedTodos;
+  }
+  return [];
 };
 
+// Save current list to LocalStorage
 const saveToLocalStorage = () => {
   localStorage.setItem("todo", JSON.stringify(todoList));
 };
 
+// Add a new task
 const addTask = (text) => {
-  const task = { id: todoList ? todoList.length + 1 : 1, task: text };
-  todoList.push(task);
+  const newTask = {
+    id: todoList.length + 1,
+    task: text.trim(),
+  };
+  todoList.push(newTask);
   saveToLocalStorage();
 };
 
-const deleteTask = (idn) => {
-    todoList = todoList.filter(to => to.id != idn)
-    saveToLocalStorage();
-    alert(`Task Deleted ${idn}`)
-}
-
-const showList = () => {
-  todoList = JSON.parse(localStorage.getItem("todo"));
-
-  if (todoList) {
-    todoListUl.innerHTML = "";
-
-    todoList.forEach((item, key = ind) => {
-      let li = document.createElement("li");
-      let btn = document.createElement("button")
-      btn.textContent = "❌"
-      btn.dataset.id = item.id;
-      li.innerHTML = `${item.task}`;
-      li.appendChild(btn);
-      
-      li.classList.add("todo-item");
-      todoListUl.appendChild(li);
-    });
-  }
+// Delete a task by ID
+const deleteTask = (id) => {
+  todoList = todoList.filter((todo) => todo.id != id);
+  saveToLocalStorage();
+  alert(`Task Deleted: ${id}`);
 };
 
-addBTN.addEventListener("click", (e) => {
-  addTask(input.value);
-  input.value = "";
-  showList();
-  console.log(todoList);
+// Render all tasks to the UI
+const renderTodoList = () => {
+  todoListElement.innerHTML = "";
+
+  todoList.forEach((item) => {
+    const listItem = document.createElement("li");
+    listItem.classList.add("todo-item");
+
+    listItem.innerHTML = `${item.task}`;
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "❌";
+    deleteButton.dataset.id = item.id;
+
+    listItem.appendChild(deleteButton);
+    todoListElement.appendChild(listItem);
+  });
+};
+
+// Event: Add Task
+addButton.addEventListener("click", () => {
+  const taskText = todoInput.value.trim();
+  if (taskText) {
+    addTask(taskText);
+    todoInput.value = "";
+    renderTodoList();
+  }
 });
 
-deleteAllBTN.addEventListener("click", ()=> {
-    todoList = [];
-    saveToLocalStorage();
-    showList()
-})
+// Event: Delete All Tasks
+deleteAllButton.addEventListener("click", () => {
+  todoList = [];
+  saveToLocalStorage();
+  renderTodoList();
+});
 
-todoListUl.addEventListener("click", (e) => {
-    if(e.target.tagName === "BUTTON"){
-        deleteTask(e.target.dataset.id);
-        showList();
-    }
-})
+// Event: Delete Single Task
+todoListElement.addEventListener("click", (e) => {
+  if (e.target.tagName === "BUTTON") {
+    deleteTask(e.target.dataset.id);
+    renderTodoList();
+  }
+});
 
-
+// Initial Load
 todoList = getTodoList();

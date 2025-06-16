@@ -1,58 +1,69 @@
-let input = document.querySelector("input");
-let btn = document.querySelector("button");
-let errP = document.querySelector(".err");
-let loader = document.querySelector(".loader");
-let opContainer = document.querySelector(".output-container");
+// Element references
+const inputField = document.querySelector("input");
+const fetchButton = document.querySelector("button");
+const errorMessage = document.querySelector(".err");
+const loader = document.querySelector(".loader");
+const outputContainer = document.querySelector(".output-container");
+const weatherImage = document.querySelector("img");
 
-let dataToShow = ["city", "State", "Country", "Time-Zone"];
+// Display weather data on screen
+const displayWeather = (weatherData) => {
+  outputContainer.style.display = "flex";
+  document.getElementById(
+    "city"
+  ).textContent = `City: ${weatherData.location.name}`;
+  document.getElementById(
+    "region"
+  ).textContent = `Region: ${weatherData.location.region}`;
+  document.getElementById(
+    "country"
+  ).textContent = `Country: ${weatherData.location.country}`;
+  document.getElementById(
+    "time-zone"
+  ).textContent = `Time-Zone: ${weatherData.location.tz_id}`;
 
-let data = {};
+  document.getElementById(
+    "tempreture"
+  ).textContent = `Temperature: ${weatherData.current.temp_c}°C`;
+  document.getElementById(
+    "condition"
+  ).textContent = `Condition: ${weatherData.current.condition.text}`;
 
-const displayData = (data) => {
-  let cityP = document.getElementById("city");
-  let regionP = document.getElementById("region");
-  let countryP = document.getElementById("country");
-  let tzP = document.getElementById("time-zone");
-
-  let tempretureP = document.getElementById("tempreture");
-  let conditionP = document.getElementById("condition");
-  let image = document.querySelector("img");
-
-  cityP.textContent = `City: ${data.location.name}`;
-  regionP.textContent = `Region: ${data.location.region}`;
-  countryP.textContent = `Country: ${data.location.country}`;
-  tzP.textContent = `Time-Zone: ${data.location.tz_id}`;
-
-  tempretureP.textContent = `Temprature: ${data.current.temp_c}`;
-  conditionP.textContent = `Condition: ${data.current.condition.text}`;
-  image.src = data.current.condition.icon;
-  image.style.display = "block";
+  weatherImage.src = weatherData.current.condition.icon;
+  weatherImage.style.display = "block";
 };
-const fetchWeather = async (city) => {
+
+// Fetch weather data from API
+const fetchWeatherData = async (cityName) => {
   loader.style.display = "block";
-  opContainer.style.display = "none";
+  outputContainer.style.display = "none";
 
   try {
-    const res = await fetch(
-      `http://api.weatherapi.com/v1/current.json?key=08d05598363b4c2d9ca192903241704&q=${city}&aqi=yes`
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/current.json?key=08d05598363b4c2d9ca192903241704&q=${cityName}&aqi=yes`
     );
 
-    if (!res.ok) throw Error("City not Found");
-    const data = await res.json();
-    displayData(data);
-  } catch(err) {
-    console.log(err)
+    if (!response.ok) throw new Error("City not found");
+
+    const weatherData = await response.json();
+    displayWeather(weatherData);
+  } catch (error) {
+    console.error("Fetch error:", error);
+    errorMessage.style.display = "block";
   } finally {
     loader.style.display = "none";
-    opContainer.style.display = "flex";
+    outputContainer.style.display = "flex";
   }
 };
 
-btn.addEventListener("click", () => {
-  if (input.value) {
-    fetchWeather(input.value);
-    errP.style.display = "none";
+// Button click event
+fetchButton.addEventListener("click", () => {
+  const city = inputField.value.trim();
+
+  if (city) {
+    errorMessage.style.display = "none";
+    fetchWeatherData(city);
   } else {
-    errP.style.display = "block";
+    errorMessage.style.display = "block";
   }
 });
