@@ -1,156 +1,162 @@
-let inputTitle = document.querySelector("#title");
-let inputTag = document.querySelector("#tags");
-let inputContent = document.querySelector("#content");
+// Element selectors
+const inputTitle = document.querySelector("#title");
+const inputTag = document.querySelector("#tags");
+const inputContent = document.querySelector("#content");
 
-let addTagBtn = document.querySelector("#add-tag-btn");
-let addNoteBtn = document.querySelector("#add-note-btn");
+const addTagBtn = document.querySelector("#add-tag-btn");
+const addNoteBtn = document.querySelector("#add-note-btn");
 
-let notesContainer = document.querySelector(".notes-container");
-let tagsContainer = document.querySelector(".tags-container");
-let inputSearch = document.querySelector("#search");
+const notesContainer = document.querySelector(".notes-container");
+const tagsContainer = document.querySelector(".tags-container");
+const inputSearch = document.querySelector("#search");
 
-let notes;
+// Data storage
+let notes = [];
 let tags = [];
 
+// LocalStorage functions
 const saveToLocalStorage = () => {
   localStorage.setItem("notes", JSON.stringify(notes));
-  alert("Notes Saved");
 };
 
-const getNotes = () => {
-  data = localStorage.getItem("notes");
-
-  if (data) {
-    notes = JSON.parse(data);
-    showNotes(notes);
-  } else {
-    notes = [];
-  }
+const loadNotesFromStorage = () => {
+  const data = localStorage.getItem("notes");
+  notes = data ? JSON.parse(data) : [];
+  showNotes(notes);
 };
 
-const showNotes = (notes) => {
+// Display all notes
+const showNotes = (notesToDisplay) => {
   notesContainer.innerHTML = "";
 
-  if (notes) {
-    console.log("Notes are there");
-    notes.forEach((noteItem) => {
-      let noteDiv = document.createElement("div");
-      noteDiv.classList.add("note");
-
-      noteDiv.innerHTML = `<h3 id="note-title">${noteItem.title}</h3>`;
-      let DeleteBtn = document.createElement("button");
-      DeleteBtn.textContent = "❌";
-      DeleteBtn.id = "deletebtn";
-      DeleteBtn.dataset.id = noteItem.id;
-      noteDiv.appendChild(DeleteBtn);
-
-      let tagsContainer = document.createElement("div");
-      tagsContainer.classList.add("tags");
-
-      if (noteItem.tags)
-        noteItem.tags.forEach((tg) => {
-          let tagP = document.createElement("p");
-          tagP.textContent = tg;
-          tagsContainer.appendChild(tagP);
-        });
-
-      noteDiv.appendChild(tagsContainer);
-
-      let noteContent = document.createElement("div");
-      noteContent.id = "note-content";
-      noteContent.textContent = noteItem.content;
-
-      noteDiv.appendChild(noteContent);
-      notesContainer.appendChild(noteDiv);
-    });
-  } else {
-    alert("No Notes Available");
+  if (!notesToDisplay || notesToDisplay.length === 0) {
+    notesContainer.innerHTML = `<p style="text-align:center; grid-column: 1 / -1;">No notes found.</p>`;
+    return;
   }
+
+  notesToDisplay.forEach((note) => {
+    const noteDiv = document.createElement("div");
+    noteDiv.classList.add("note");
+
+    // Title
+    noteDiv.innerHTML = `<h3 id="note-title">${note.title}</h3>`;
+
+    // Delete button
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "❌";
+    deleteBtn.id = "deletebtn";
+    deleteBtn.dataset.id = note.id;
+    noteDiv.appendChild(deleteBtn);
+
+    // Tags
+    const noteTags = document.createElement("div");
+    noteTags.classList.add("tags");
+
+    note.tags.forEach((tag) => {
+      const tagEl = document.createElement("p");
+      tagEl.textContent = tag;
+      noteTags.appendChild(tagEl);
+    });
+
+    noteDiv.appendChild(noteTags);
+
+    // Content
+    const contentEl = document.createElement("div");
+    contentEl.id = "note-content";
+    contentEl.textContent = note.content;
+    noteDiv.appendChild(contentEl);
+
+    notesContainer.appendChild(noteDiv);
+  });
 };
 
+// Add note to memory + UI
 const addNote = (note) => {
   notes.push({
-    id: notes ? notes.length + 1 : 1,
-    title: note.title,
-    tags: note.tags,
-    content: note.content,
+    id: Date.now(), // More robust than length+1
+    ...note,
   });
 
   saveToLocalStorage();
   showNotes(notes);
-  inputContent.value = "";
+
+  // Reset fields
   inputTitle.value = "";
+  inputContent.value = "";
+  tags = [];
+  showTags();
+
+  alert("Note added!");
 };
 
+// Delete note
 const deleteNote = (id) => {
   notes = notes.filter((n) => n.id != id);
-
   saveToLocalStorage();
   showNotes(notes);
 };
 
+// Display current tags
 const showTags = () => {
   tagsContainer.innerHTML = "";
   tags.forEach((tag) => {
-    let tagP = document.createElement("p");
-    tagP.textContent = tag;
-    tagP.classList.add("input-tag");
-    tagsContainer.appendChild(tagP);
+    const tagEl = document.createElement("p");
+    tagEl.textContent = tag;
+    tagEl.classList.add("input-tag");
+    tagsContainer.appendChild(tagEl);
   });
 };
 
+// Search/filter notes
 const updateNotes = (keyword) => {
-  
-  filteredNotes = notes.filter((n) => {
-    return n.title.toLowerCase().includes(keyword.toLowerCase()) ||
-    n.tags.some((t) => t.toLowerCase().includes(keyword.toLowerCase())) ||
-    n.content.toLowerCase().includes(keyword.toLowerCase());
-  });
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(keyword.toLowerCase()) ||
+    note.content.toLowerCase().includes(keyword.toLowerCase()) ||
+    note.tags.some((tag) => tag.toLowerCase().includes(keyword.toLowerCase()))
+  );
 
- 
   showNotes(filteredNotes);
 };
 
+// Event Listeners
 addTagBtn.addEventListener("click", () => {
-  tags.push(inputTag.value);
-  inputTag.value = "";
-  showTags();
+  const tag = inputTag.value.trim();
+  if (tag && !tags.includes(tag)) {
+    tags.push(tag);
+    inputTag.value = "";
+    showTags();
+  }
 });
 
 addNoteBtn.addEventListener("click", () => {
-  let newNote = {};
-  if (inputTitle.value) {
-    newNote.title = inputTitle.value;
-  } else {
-    alert("Enter a Valid Title");
-  }
+  const title = inputTitle.value.trim();
+  const content = inputContent.value.trim();
 
-  if (tags.length >= 1) {
-    newNote.tags = tags;
-  } else {
-    alert("Add Atleast 1 tag");
-  }
+  if (!title) return alert("Please enter a title.");
+  if (tags.length === 0) return alert("Please add at least one tag.");
 
-  newNote.content = inputContent.value;
-  addNote(newNote);
-  tags = [];
-  tagsContainer.innerHTML = "";
+  addNote({ title, tags: [...tags], content });
 });
 
 let timer;
 inputSearch.addEventListener("input", () => {
   clearTimeout(timer);
-  timer = setTimeout(() => {
-    updateNotes(inputSearch.value);
-  }, 1000);
+  const keyword = inputSearch.value.trim();
 
-  if (inputSearch.value == "") {
-    getNotes();
+  timer = setTimeout(() => {
+    if (keyword) updateNotes(keyword);
+    else loadNotesFromStorage();
+  }, 500);
+});
+
+notesContainer.addEventListener("click", (e) => {
+  if (e.target.id === "deletebtn") {
+    const id = e.target.dataset.id;
+    if (confirm("Are you sure you want to delete this note?")) {
+      deleteNote(id);
+    }
   }
 });
 
-getNotes();
-
-notesContainer.addEventListener("click", (e) => {
-  if (e.target.tagName == "BUTTON") deleteNote(e.target.dataset.id);
-});
+// Initial Load
+loadNotesFromStorage();

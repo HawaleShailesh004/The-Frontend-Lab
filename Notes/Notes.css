@@ -1,151 +1,216 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 5rem;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fffefc;
+  color: #333;
+  padding: 3rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeInBody 0.7s ease-in;
+}
+
+@keyframes fadeInBody {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #1d3557;
+  animation: fadeInUp 0.6s ease-in-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .main-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    width: 100%;
-
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  animation: fadeInUp 0.5s ease-in-out;
 }
 
 .input-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    width: 100%;
-}
-
-.search-container {
-    margin-top: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+  width: 100%;
+  background: #fefefe;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border: 1px solid #e5e5e5;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.7s ease forwards;
 }
 
 .inputs {
-    width: 70%;
-    padding: 0.7rem 1rem;
-    color: black;
-    font-size: 1.1rem;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.inputs:focus {
+  border-color: #ff9f1c;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 159, 28, 0.2);
 }
 
 .input-tag-container {
-    width: 70%;
-   
-    & button{
-        margin-left: 1rem;
-    }
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+#add-tag-btn {
+  background-color: #ff9f1c;
+  color: white;
+  font-size: 0.9rem;
 }
 
 .tags-container {
-    display: flex;
-    justify-content: start;
-    gap: 0.5rem;
-    width: 70%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  animation: fadeInUp 0.5s ease;
 }
 
 .input-tag {
-    padding: 0.5rem;
-    font-size: 0.7rem;
-    background-color: rgba(0, 255, 255, 0.3);
-    color: black;
+  background-color: #ffeeba;
+  color: #856404;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.85rem;
 }
 
 button {
-    padding: 0.6rem 1rem;
-    background-color: black;
-    color: white;
-    cursor: pointer;
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    transition: all 0.3s ease;
-    -webkit-transition: all 0.3s ease;
-    -moz-transition: all 0.3s ease;
-    -ms-transition: all 0.3s ease;
-    -o-transition: all 0.3s ease;
+  padding: 0.6rem 1.1rem;
+  background-color: #06d6a0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
-
 
 button:hover {
-    scale: 1.03;
+  background-color: #04b58a;
+  transform: scale(1.05);
 }
 
-
-.notes-container{
-    width: 70%;
-    margin-top: 3rem;
-    display: grid;
-    height: auto;
-    gap: 1.5rem;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: auto;
-    padding: 1rem;
-    border-radius: 5px;
-    background-color: rgba(0, 0, 0,0.06);
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
+.search-container {
+  width: 100%;
 }
 
-.note{
-    padding: 1rem;
-    border: 1px solid black;
-    border-radius: 5px;
-   
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    -ms-border-radius: 5px;
-    -o-border-radius: 5px;
-    background-color: white;
-    display: grid;
-    grid-template-columns: 85% 15%;
-
-    & button{
-        padding: 0.5rem;
-        font-size: 0.5rem;
-        grid-row: span 1;
-    }
+.notes-container {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  animation: fadeInUp 0.6s ease;
 }
 
-.tags{
-    grid-column: span 2;
-    grid-row: span 1;
-    display: flex;
-    justify-content: start;
-    gap: 0.5rem;
-    margin-bottom: 1rem;
+.note {
+  background-color: #fff;
+  border: 2px solid #f4f4f4;
+  border-left: 5px solid #ff6b6b;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  position: relative;
+  transition: box-shadow 0.3s, transform 0.2s ease-in-out;
+  animation: fadeInNote 0.4s ease forwards;
 }
 
-.tags p{
-    background-color: rgba(0, 0, 0,0.06);
-    padding: 0.5rem;
-    font-size: 0.9rem;
+@keyframes fadeInNote {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
-#note-content{
-    padding: 0.5rem;
-    text-align: justify;
-    grid-column: span 2;
+.note:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+.note h3 {
+  font-size: 1.2rem;
+  color: #1d3557;
+  word-break: break-word;
+  padding-right: 2rem;
+}
+
+.note #deletebtn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  color: #ff4d4d;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.note #deletebtn:hover {
+  color: #d62f2f;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tags p {
+  background-color: #d0f0fd;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  font-size: 0.8rem;
+  color: #005073;
+}
+
+#note-content {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.5;
+  text-align: justify;
+  animation: fadeInUp 0.3s ease;
 }
