@@ -15,11 +15,16 @@ Each project in this lab explores a specific concept, feature, or UI behavior in
 | ✅ Notes   | LocalStorage-based note keeper |
 
 ## 💡 What I'm Practicing
-- DOM manipulation
-- Form handling and validation
-- Responsive design
-- LocalStorage and Fetch API
-- Clean UI/UX patterns
+
+- Core JavaScript concepts through hands-on features
+- DOM manipulation & dynamic UI rendering
+- Form handling with real-time validation
+- LocalStorage for persistent data
+- Search, filter, and CRUD operations
+- Responsive, clean, and accessible UI/UX
+- Working with browser APIs like setTimeout & event delegation
+- Preparing for real-world JS problem-solving
+
 
 ---
 
