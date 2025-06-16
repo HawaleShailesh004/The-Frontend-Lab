@@ -6,13 +6,13 @@ Each project in this lab explores a specific concept, feature, or UI behavior in
 
 ## 🔧 Projects
 
-| Name   | Description |
-|--------|-------------|
-| ✅ Timer   | Countdown timer with date/time input and live display |
-| ✅ Todo    | Task list app with add/remove/edit features |
-| ✅ Quiz    | Interactive quiz with scoring system |
-| ✅ Weather | Simple weather app using fetch API |
-| ✅ Notes   | LocalStorage-based note keeper |
+| Name   | Description | Live Demo |
+|--------|-------------|-----------|
+| ✅ [Timer](https://hawaleshailesh004.github.io/The-Frontend-Lab/Timer/)   | Countdown timer with date/time input and live display | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Timer/) |
+| ✅ [Todo](https://hawaleshailesh004.github.io/The-Frontend-Lab/Todo/)    | Task list app with add/remove/edit features | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Todo/) |
+| ✅ [Quiz](https://hawaleshailesh004.github.io/The-Frontend-Lab/Quiz/)    | Interactive quiz with scoring system | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Quiz/) |
+| ✅ [Weather](https://hawaleshailesh004.github.io/The-Frontend-Lab/Weather/) | Simple weather app using fetch API | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Weather/) |
+| ✅ [Notes](https://hawaleshailesh004.github.io/The-Frontend-Lab/Notes/)   | LocalStorage-based note keeper | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Notes/) |
 
 ## 💡 What I'm Practicing
 
@@ -24,7 +24,6 @@ Each project in this lab explores a specific concept, feature, or UI behavior in
 - Responsive, clean, and accessible UI/UX
 - Working with browser APIs like setTimeout & event delegation
 - Preparing for real-world JS problem-solving
-
 
 ---
 
