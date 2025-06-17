@@ -16,7 +16,7 @@ const getFromLS = () => {
     transactions = data;
     displayTransactions();
   } else {
-    alert("Not Available");
+    
   }
 };
 
