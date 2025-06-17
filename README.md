@@ -13,7 +13,7 @@ Each project in this lab explores a specific concept, feature, or UI behavior in
 | ✅ [Quiz](https://hawaleshailesh004.github.io/The-Frontend-Lab/Quiz/)    | Interactive quiz with scoring system | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Quiz/) |
 | ✅ [Weather](https://hawaleshailesh004.github.io/The-Frontend-Lab/Weather/) | Simple weather app using fetch API | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Weather/) |
 | ✅ [Notes](https://hawaleshailesh004.github.io/The-Frontend-Lab/Notes/)   | LocalStorage-based note keeper | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Notes/) |
-| ✅ [Expense Tracker](https://hawaleshailesh004.github.io/The-Frontend-Lab/Expense Tracker/)   | LocalStorage-based note keeper | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Expense Tracker/) |
+| ✅ [Expense Tracker](https://hawaleshailesh004.github.io/The-Frontend-Lab/Expense%20Tracker/)   | LocalStorage-based note keeper | [🔗 Open](https://hawaleshailesh004.github.io/The-Frontend-Lab/Expense%20Tracker/) |
 
 ## 💡 What I'm Practicing
 
