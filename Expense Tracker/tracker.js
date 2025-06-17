@@ -15,9 +15,7 @@ const getFromLS = () => {
   if (data) {
     transactions = data;
     displayTransactions();
-  } else {
-    
-  }
+
 };
 
 // Save data to localStorage
