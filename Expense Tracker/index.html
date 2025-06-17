@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="./tracker.css">
+</head>
+
+<body>
+    <h2 id="title">Expense Tracker</h2>
+    <div class="main-container">
+        <div class="input-container">
+            <form id="myForm">
+                <input type="number" name="amount" id="amount" placeholder="Amount">
+
+                <select name="type" id="type">
+                    <option value="Expense">Expense</option>
+                    <option value="Income">Income</option>
+                </select>
+                <input type="text" name="desc" id="desc" placeholder="Description">
+
+                <input type="text" name="category" id="category" placeholder="Category">
+
+                <button id="submitbtn" type="submit">Add Transaction</button>
+            </form>
+
+        </div>
+
+
+
+        <div class="output-container">
+
+            <div class="visualize-container">
+                <div class="total-income">
+                    <p>Total Income</p>
+                    <p id="total-income-amount" class="amount"></p>
+                </div>
+                <div class="total-expense">
+                    <p>Total Expense</p>
+                    <p id="total-expense-amount" class="amount"></p>
+                </div>
+            </div>
+            <h3>All Transactions</h3>
+
+            <button id="deleteall">Delete all Transactions</button>
+
+            <div class="list-container">
+
+                <!-- <div class="transaction">
+                    <h4 class="amnt">500</h4>
+                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, iusto.
+                    </p>
+                    <button id="deletebtn" type="button">❌</button>
+                </div>
+                <div class="transaction">
+                    <h4 class="amnt">500</h4>
+                    <p class="description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur, iusto.
+                    </p>
+                    <button id="deletebtn" type="button">❌</button>
+                </div> -->
+            </div>
+        </div>
+    </div>
+</body>
+
+<script src="./tracker.js"></script>
+
+</html>
